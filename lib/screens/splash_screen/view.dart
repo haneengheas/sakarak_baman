@@ -1,10 +1,7 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-
 import '../../const/colors.dart';
-import '../login_screen/view.dart';
-
+import '../registration/login_screen/view.dart';
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
 
@@ -15,7 +12,7 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const Login()));
     });

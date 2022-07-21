@@ -32,6 +32,8 @@ dependencies:
   google_fonts:
   expandable:
   syncfusion_flutter_charts:
+  intro_slider:
+
 
   flutter:
     sdk: flutter

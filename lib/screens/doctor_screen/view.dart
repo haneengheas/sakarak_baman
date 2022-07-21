@@ -66,7 +66,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        color: light_pink),
+                        color: lightPink),
                     child: Text(
                       'د. داليا يحي',
                       style: GoogleFonts.tajawal(

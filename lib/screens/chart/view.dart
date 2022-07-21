@@ -47,7 +47,7 @@ class _ChartScreenState extends State<ChartScreen> {
               decoration: BoxDecoration(
                 color: white1,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: babY_blue, width: 2),
+                border: Border.all(color: babyBlue, width: 2),
               ),
               child: Center(
                   child: SfCartesianChart(

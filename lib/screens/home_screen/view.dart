@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: const [
                   BoxShadow(
-                      color: lightgrey, offset: Offset(0, 1), blurRadius: 5)
+                      color: lightGrey, offset: Offset(0, 1), blurRadius: 5)
                 ],
               ),
               child: Directionality(
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                   color: white1,
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: babY_blue, width: 2),
+                  border: Border.all(color: babyBlue, width: 2),
                 ),
                 child: Directionality(
                   textDirection: TextDirection.rtl,
@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                                 icon: const Icon(
                                   Icons.close,
-                                  color: lightgrey,
+                                  color: lightGrey,
                                   size: 15,
                                 )),
                           )),
@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: const [
                   BoxShadow(
-                      color: lightgrey, offset: Offset(0, 1), blurRadius: 1)
+                      color: lightGrey, offset: Offset(0, 1), blurRadius: 1)
                 ],
               ),
               child: Directionality(

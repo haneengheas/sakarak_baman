@@ -35,7 +35,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
         child: BottomNavigationBar(
           backgroundColor: blue,
           selectedItemColor: white1,
-          unselectedItemColor: lightgrey,
+          unselectedItemColor: lightGrey,
           currentIndex: pageindex,
           onTap: (value) {
             setState(() {

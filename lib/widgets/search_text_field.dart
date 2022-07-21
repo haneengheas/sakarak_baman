@@ -18,13 +18,13 @@ class SearchBox extends StatelessWidget {
               fillColor: white1,
               enabledBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(color: light_purple, width: 2)),
+                  borderSide: BorderSide(color: lightPurple, width: 2)),
               focusedBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(color: light_purple, width: 2)),
+                  borderSide: BorderSide(color: lightPurple, width: 2)),
               prefixIcon: const Icon(
                 Icons.search,
-                color: lightgrey,
+                color: lightGrey,
               ),
               hintText: 'ابحث هنا',
               hintStyle: GoogleFonts.tajawal(
