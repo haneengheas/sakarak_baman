@@ -60,12 +60,15 @@ class _SignUpState extends State<SignUp> {
             body: Form(
                 key: _formKey,
                 child: IntroSlider(
-                  autoScrollInterval: const Duration(minutes: 5),
-
                     slides: slides,
                     colorDot: lightPink,
                     colorActiveDot: red,
                     sizeDot: 12.5,
+                    showPrevBtn: true,
+                    showSkipBtn: false,
+                    autoScroll: false,
+                    scrollable: false,
+                    autoScrollInterval: const Duration(minutes: 10),
                     renderNextBtn: Text(
                       ' التالي',
                       style: GoogleFonts.tajawal(
@@ -74,8 +77,14 @@ class _SignUpState extends State<SignUp> {
                         color: black,
                       ),
                     ),
-                    autoScroll: true,
-                    scrollable: false,
+                    renderPrevBtn: Text(
+                      ' السابق',
+                      style: GoogleFonts.tajawal(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: black,
+                      ),
+                    ),
                     renderDoneBtn: Text(
                       ' تسجيل',
                       style: GoogleFonts.tajawal(

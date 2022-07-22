@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sakarak_baman/screens/registration/forgetPassword_screen/view.dart';
 import 'package:sakarak_baman/widgets/header.dart';
 
 import '../../../const/colors.dart';
@@ -81,7 +82,10 @@ class _LoginState extends State<Login> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => const ForgetPassword())),
                         child: Text("هل نسيت كلمه المرور؟",
                             style: GoogleFonts.tajawal(
                               fontSize: 16,

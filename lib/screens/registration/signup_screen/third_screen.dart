@@ -16,16 +16,30 @@ class ThirdScreen extends StatefulWidget {
 
 class _ThirdScreenState extends State<ThirdScreen> {
   List<Widget> insulin = [];
- TimeOfDay  _time= const TimeOfDay(hour: 7, minute: 15) ;
+  List<Widget> pills = [];
+  TimeOfDay _timeOfInsulin = const TimeOfDay(hour: 7, minute: 15);
+  TimeOfDay _timeOfPills = const TimeOfDay(hour: 8, minute: 15);
 
-  void _selectTime() async {
+  void _selectTimeOfInsulin() async {
     final TimeOfDay? newTime = await showTimePicker(
       context: context,
-      initialTime: _time,
+      initialTime: _timeOfInsulin,
     );
     if (newTime != null) {
       setState(() {
-        _time = newTime;
+        _timeOfInsulin = newTime;
+      });
+    }
+  }
+
+  void _selectTimeOfPills() async {
+    final TimeOfDay? newTime = await showTimePicker(
+      context: context,
+      initialTime: _timeOfPills,
+    );
+    if (newTime != null) {
+      setState(() {
+        _timeOfPills = newTime;
       });
     }
   }
@@ -35,6 +49,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        // box for insulin amount
         Container(
           alignment: Alignment.center,
           width: width(context, 1),
@@ -52,6 +67,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
             child: Column(
               children: [
                 ExpandablePanel(
+                  // header with title
                   header: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 10.0, horizontal: 10),
@@ -59,7 +75,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
                       children: [
                         Text(
                           'أنسولين',
-                          style: GoogleFonts.rubik(
+                          style: GoogleFonts.tajawal(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                           ),
@@ -69,108 +85,116 @@ class _ThirdScreenState extends State<ThirdScreen> {
                         ),
                         Image.asset(
                           'assets/insulin.png',
-                          height: 20,
-                          width: 20,
+                          height: 25,
+                          width: 25,
                         )
                       ],
                     ),
                   ),
-                  expanded: insulin.isEmpty
-                      ? const SizedBox()
-                      : Column(
-                          children: insulin
-                              .map((e) => SizedBox(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: height(context, 8),
-                                          child: ExpandedTextField(
-                                            hint: 'اسم الحقنة',
-                                            secure: false,
-
-                                            keyBoardType: TextInputType.name,
-                                            onChange: (val) {},
+                  expanded: const SizedBox(),
+                  // details of insulin
+                  collapsed: Column(
+                    children: insulin
+                        .map((e) => SizedBox(
+                              child: Column(
+                                children: [
+                                  // name of insulin
+                                  SizedBox(
+                                    height: height(context, 8),
+                                    child: ExpandedTextField(
+                                      hint: 'اسم الحقنة',
+                                      secure: false,
+                                      keyBoardType: TextInputType.name,
+                                      onChange: (val) {},
+                                    ),
+                                  ),
+                                  // amount of insulin and time
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      // amount of insulin
+                                      SizedBox(
+                                        width: width(context, 2.5),
+                                        height: height(context, 8),
+                                        child: ExpandedTextField(
+                                          hint: 'عدد الوحدات ',
+                                          secure: false,
+                                          keyBoardType: TextInputType.number,
+                                          onChange: (val) {},
+                                        ),
+                                      ),
+                                      // time of insulin
+                                      InkWell(
+                                        onTap: () {
+                                          if (kDebugMode) {
+                                            print(
+                                                _timeOfInsulin.format(context));
+                                          }
+                                          _selectTimeOfInsulin();
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          alignment: Alignment.centerRight,
+                                          width: width(context, 3),
+                                          height: height(context, 11),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: white2, width: 2),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Text(
+                                            _timeOfInsulin.format(context) ==
+                                                    '7:15 AM'
+                                                ? 'الساعه'
+                                                : _timeOfInsulin
+                                                    .format(context),
+                                            style: GoogleFonts.tajawal(
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 17,
+                                              color: lightGrey,
+                                            ),
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            SizedBox(
-                                              width: width(context, 2.5),
-                                              height: height(context, 8),
-                                              child: ExpandedTextField(
-                                                hint: 'عدد الوحدات ',
-                                                secure: false,
-
-                                                keyBoardType:
-                                                    TextInputType.number,
-                                                onChange: (val) {},
-                                              ),
-                                            ),
-                                            InkWell(
-                                              onTap: ()  {
-                                                if (kDebugMode) {
-                                                  print(_time.format(context));
-                                                }
-                                                _selectTime();},
-                                              child: Container(
-                                                padding: const EdgeInsets.symmetric(horizontal: 10),
-                                                alignment: Alignment.centerRight,
-                                                width: width(context, 3),
-                                                height: height(context, 11),
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: white2, width: 2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                child: Text(
-                                                 _time.format(context)== '7:15 AM' ?  'الساعه': _time.format(context),
-                                                  style: GoogleFonts.tajawal(
-                                                fontWeight:
-                                                    FontWeight.normal,
-                                                fontSize: 17,
-                                                color: lightGrey,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 30,
-                                              child: IconButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      insulin.remove(e);
-                                                    });
-                                                  },
-                                                  icon: const Icon(
-                                                    Icons
-                                                        .remove_circle_outline_sharp,
-                                                    color: red,
-                                                    size: 20,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        const Divider(
-                                          thickness: 1.5,
-                                          endIndent: 10,
-                                          indent: 10,
-                                          color: lightGrey,
-                                        )
-                                      ],
-                                    ),
-                                  ))
-                              .toList(),
-                        ),
-                  collapsed: const SizedBox(),
+                                      ),
+                                      // remove Insulin dose
+                                      SizedBox(
+                                        width: 30,
+                                        child: IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                insulin.remove(e);
+                                              });
+                                            },
+                                            icon: const Icon(
+                                              Icons.remove_circle_outline_sharp,
+                                              color: red,
+                                              size: 20,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                  const Divider(
+                                    thickness: 1.5,
+                                    endIndent: 10,
+                                    indent: 10,
+                                    color: lightGrey,
+                                  )
+                                ],
+                              ),
+                            ))
+                        .toList(),
+                  ),
                   theme: ExpandableThemeData(
                     hasIcon: true,
+                    useInkWell: true,
                     alignment: Alignment.center,
                     inkWellBorderRadius: BorderRadius.circular(15),
                   ),
                 ),
+                // button for add new insulin syringe
                 Align(
                   alignment: Alignment.centerLeft,
                   child: ElevatedButton(
@@ -201,40 +225,41 @@ class _ThirdScreenState extends State<ThirdScreen> {
                                     child: ExpandedTextField(
                                       hint: 'عدد الوحدات ',
                                       secure: false,
-
                                       keyBoardType: TextInputType.number,
                                       onChange: (val) {},
                                     ),
                                   ),
                                   InkWell(
-                                    onTap: ()  {
+                                    onTap: () {
                                       if (kDebugMode) {
-                                        print(_time.format(context));
+                                        print(_timeOfInsulin.format(context));
                                       }
-                                      _selectTime();},
+                                      _selectTimeOfInsulin();
+                                    },
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
                                       alignment: Alignment.centerRight,
                                       width: width(context, 3),
                                       height: height(context, 11),
                                       decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: white2, width: 2),
-                                        borderRadius:
-                                        BorderRadius.circular(10),
+                                        border:
+                                            Border.all(color: white2, width: 2),
+                                        borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Text(
-                                        _time.format(context)== '7:15 AM' ?  'الساعه': _time.format(context),
+                                        _timeOfInsulin.format(context) ==
+                                                '7:15 AM'
+                                            ? 'الساعه'
+                                            : _timeOfInsulin.format(context),
                                         style: GoogleFonts.tajawal(
-                                          fontWeight:
-                                          FontWeight.normal,
+                                          fontWeight: FontWeight.normal,
                                           fontSize: 17,
                                           color: lightGrey,
                                         ),
                                       ),
                                     ),
                                   ),
-
                                 ],
                               ),
                               const Divider(
@@ -260,10 +285,10 @@ class _ThirdScreenState extends State<ThirdScreen> {
             ),
           ),
         ),
+        // box sugar pills dosage
         Container(
           alignment: Alignment.center,
           width: width(context, 1),
-          // height: 60,
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           decoration: BoxDecoration(
@@ -275,74 +300,212 @@ class _ThirdScreenState extends State<ThirdScreen> {
           ),
           child: Directionality(
             textDirection: TextDirection.rtl,
-            child: ExpandablePanel(
-              header: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
-                child: Row(
-                  children: [
-                    Text(
-                      'أقراص',
-                      style: GoogleFonts.rubik(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                      ),
+            child: Column(
+              children: [
+                ExpandablePanel(
+                  // header with title
+                  header: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 10),
+                    child: Row(
+                      children: [
+                        Text(
+                          'أقراص',
+                          style: GoogleFonts.rubik(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset(
+                          'assets/medicine.png',
+                          height: 20,
+                          width: 20,
+                        )
+                      ],
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Image.asset(
-                      'assets/medicine.png',
-                      height: 20,
-                      width: 20,
-                    )
-                  ],
+                  ),
+                  expanded: const SizedBox(),
+                  collapsed: Column(
+                    children: pills
+                        .map((e) => SizedBox(
+                              child: Column(
+                                children: [
+                                  // name of pills
+                                  SizedBox(
+                                    height: height(context, 8),
+                                    child: ExpandedTextField(
+                                      hint: 'اسم الدواء',
+                                      secure: false,
+                                      keyBoardType: TextInputType.name,
+                                      onChange: (val) {},
+                                    ),
+                                  ),
+                                  // amount and time of pills
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      // amount of pills
+                                      SizedBox(
+                                        width: width(context, 2.3),
+                                        height: height(context, 8),
+                                        child: ExpandedTextField(
+                                          hint: 'عدد الاقراص',
+                                          secure: false,
+                                          keyBoardType: TextInputType.number,
+                                          onChange: (val) {},
+                                        ),
+                                      ),
+                                      // time of pills
+                                      InkWell(
+                                        onTap: () {
+                                          if (kDebugMode) {
+                                            print(_timeOfPills.format(context));
+                                          }
+                                          _selectTimeOfPills();
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          alignment: Alignment.centerRight,
+                                          width: width(context, 3),
+                                          height: height(context, 11),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: white2, width: 2),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Text(
+                                            _timeOfPills.format(context) ==
+                                                    '8:15 AM'
+                                                ? 'الساعه'
+                                                : _timeOfPills.format(context),
+                                            style: GoogleFonts.tajawal(
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 17,
+                                              color: lightGrey,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      // remove pills dose
+                                      SizedBox(
+                                        width: 30,
+                                        child: IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                pills.remove(e);
+                                              });
+                                            },
+                                            icon: const Icon(
+                                              Icons.remove_circle_outline_sharp,
+                                              color: red,
+                                              size: 20,
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                  const Divider(
+                                    thickness: 2,
+                                    color: lightGrey,
+                                  )
+                                ],
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                  theme: ExpandableThemeData(
+                    hasIcon: true,
+                    alignment: Alignment.center,
+                    inkWellBorderRadius: BorderRadius.circular(15),
+                  ),
                 ),
-              ),
-              expanded: const SizedBox(),
-              collapsed: Column(
-                children: [
-                  SizedBox(
-                    height: height(context, 8),
-                    child: ExpandedTextField(
-                      hint: 'الإسم',
-                      secure: false,
-                      keyBoardType: TextInputType.name,
-                      onChange: (val) {},
+                // button for add new sugar pills dosage
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        pills.add(SizedBox(
+                          child: Column(
+                            children: [
+                              // name of pills
+                              SizedBox(
+                                height: height(context, 8),
+                                child: ExpandedTextField(
+                                  hint: 'اسم الدواء',
+                                  secure: false,
+                                  keyBoardType: TextInputType.name,
+                                  onChange: (val) {},
+                                ),
+                              ),
+                              // amount and time of pills
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  // amount of pills
+                                  SizedBox(
+                                    width: width(context, 2.3),
+                                    height: height(context, 8),
+                                    child: ExpandedTextField(
+                                      hint: 'عدد الاقراص',
+                                      secure: false,
+                                      keyBoardType: TextInputType.number,
+                                      onChange: (val) {},
+                                    ),
+                                  ),
+                                  // time of pills
+                                  InkWell(
+                                    onTap: () {
+                                      if (kDebugMode) {
+                                        print(_timeOfPills.format(context));
+                                      }
+                                      _selectTimeOfPills();
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      alignment: Alignment.centerRight,
+                                      width: width(context, 3),
+                                      height: height(context, 11),
+                                      decoration: BoxDecoration(
+                                        border:
+                                            Border.all(color: white2, width: 2),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Text(
+                                        _timeOfPills.format(context) ==
+                                                '8:15 AM'
+                                            ? 'الساعه'
+                                            : _timeOfPills.format(context),
+                                        style: GoogleFonts.tajawal(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 17,
+                                          color: lightGrey,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ));
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: blue,
+                      shape: const CircleBorder(),
                     ),
+                    child: const Icon(Icons.add),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: width(context, 2.3),
-                        height: height(context, 8),
-                        child: ExpandedTextField(
-                          hint: 'الجرعه',
-                          secure: false,
-                          keyBoardType: TextInputType.number,
-                          onChange: (val) {},
-                        ),
-                      ),
-                      SizedBox(
-                        width: width(context, 2.3),
-                        height: height(context, 8),
-                        child: ExpandedTextField(
-                          hint: 'الساعه',
-                          secure: false,
-                          keyBoardType: TextInputType.datetime,
-                          onChange: (val) {},
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              theme: ExpandableThemeData(
-                hasIcon: true,
-                alignment: Alignment.center,
-                inkWellBorderRadius: BorderRadius.circular(15),
-              ),
+                ),
+              ],
             ),
           ),
         ),

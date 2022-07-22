@@ -1,5 +1,4 @@
-// ignore: file_names
-
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,9 +9,6 @@ class ExpandedTextField extends StatefulWidget {
   final bool secure;
   final Function(String)? onChange;
   final TextInputType keyBoardType;
-
-  //final TextEditingController? controller;
-
   const ExpandedTextField(
       {
       required this.onChange,
@@ -37,7 +33,6 @@ class _ExpandedTextField extends State<ExpandedTextField> {
           onChanged: widget.onChange,
           obscureText: widget.secure,
           keyboardType: widget.keyBoardType,
-         // controller: widget.controller!,
           decoration: InputDecoration(
             filled: true,
             fillColor: white1,
