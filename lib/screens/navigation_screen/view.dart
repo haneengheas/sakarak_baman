@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../const/colors.dart';
 import '../../const/size.dart';
-import '../advice_screen/view.dart';
+
 import '../chart/view.dart';
 import '../doctor_screen/view.dart';
 import '../home_screen/view.dart';
@@ -17,14 +17,14 @@ class NavigationScreen extends StatefulWidget {
 }
 
 class _NavigationScreenState extends State<NavigationScreen> {
-  int pageindex = 3;
+  int pageindex = 2;
   List<Widget> pages = [
     const ChartScreen(),
     const DoctorScreen(),
-    const AdviceScreen(),
     const HomeScreen()
   ];
 
+//const AdviceScreen(),
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,11 +54,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   AssetImage('assets/doctor.png'),
                 ),
                 label: 'دكتور'),
-            BottomNavigationBarItem(
-                icon: ImageIcon(
-                  AssetImage('assets/advice.png'),
-                ),
-                label: 'نصائح'),
+            // BottomNavigationBarItem(
+            //     icon: ImageIcon(
+            //       AssetImage('assets/advice.png'),
+            //     ),
+            //     label: 'نصائح'),
             BottomNavigationBarItem(
                 icon: ImageIcon(
                   AssetImage('assets/home.png'),
@@ -82,7 +82,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 builder: (builder) {
                   return Container(
                     height: height(context, 2.5),
-                    padding: const EdgeInsets.symmetric(horizontal: 15 ,vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -157,7 +158,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
             color: white1,
             size: 35,
           )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }

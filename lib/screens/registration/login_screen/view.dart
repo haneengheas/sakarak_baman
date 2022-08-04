@@ -86,7 +86,7 @@ class _LoginState extends State<Login> {
                             context,
                             MaterialPageRoute(
                                 builder: (_) => const ForgetPassword())),
-                        child: Text("هل نسيت كلمه المرور؟",
+                        child: Text("هل نسيت كلمة المرور؟",
                             style: GoogleFonts.tajawal(
                               fontSize: 16,
                               color: blue,
